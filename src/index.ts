@@ -106,6 +106,7 @@ function _validateFilterObject(filterObject: IRetailPriceFilter): boolean {
         `Unsupported filter key "${key}". Supported keys are ${SUPPORTED_FILTER_KEYS.toString()}.`
       );
     }
+    /* eslint-disable @typescript-eslint/no-non-null-assertion */
     if (key === "priceType" && !PRICE_TYPES.includes(filterObject[key]!)) {
       throw new Error(
         `Unsupported filter value "${filterObject[
@@ -113,6 +114,7 @@ function _validateFilterObject(filterObject: IRetailPriceFilter): boolean {
         ]!}" of "${key}". Supported values are ${PRICE_TYPES.toString()}.`
       );
     }
+    /* eslint-enable @typescript-eslint/no-non-null-assertion */
   }
   return true;
 }
