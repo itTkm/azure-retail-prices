@@ -1,0 +1,51 @@
+{
+  "name": "azure-retail-prices",
+  "version": "0.0.0",
+  "description": "Wrapper of Azure Retail Prices API. You can easily get the retail price of Azure without authenticating.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "check-types": "tsc --noEmit",
+    "eslint": "eslint src/**/*.ts",
+    "eslint:fix": "eslint src/**/*.ts --fix",
+    "format": "prettier --write 'src/**/*.{js,ts,json}'",
+    "lint": "npm-run-all eslint check-types",
+    "lint:fix": "npm-run-all eslint:fix check-types format",
+    "build": "tsc",
+    "preversion": "npm run lint && npm test",
+    "version": "npm run build && git add --all dist",
+    "postversion": "git push && git push --tags && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itTkm/azure-retail-prices.git"
+  },
+  "keywords": [
+    "react",
+    "react-admin",
+    "delete",
+    "button",
+    "custom",
+    "confirm"
+  ],
+  "author": "itTkm",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/itTkm/azure-retail-prices/issues"
+  },
+  "homepage": "https://github.com/itTkm/azure-retail-prices#readme",
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.5.8",
+    "@typescript-eslint/eslint-plugin": "^4.17.0",
+    "@typescript-eslint/parser": "^4.17.0",
+    "eslint": "^7.22.0",
+    "eslint-config-prettier": "8.1.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "2.2.1",
+    "typescript": "^4.2.3"
+  }
+}

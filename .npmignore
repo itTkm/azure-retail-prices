@@ -1,0 +1,9 @@
+.vscode/
+img/
+node_modules/
+src/
+example/
+.babelrc
+.eslintrc
+.gitignore
+.travis.yml

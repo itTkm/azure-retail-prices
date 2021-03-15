@@ -1,0 +1,19 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "description": "Example codes of azure-retail-prices.",
+  "main": "index.js",
+  "scripts": {
+    "require-sample": "node require.js",
+    "import-sample": "ts-node import.ts"
+  },
+  "author": "itTkm",
+  "license": "MIT",
+  "dependencies": {
+    "azure-retail-prices": "file:.."
+  },
+  "devDependencies": {
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.3"
+  }
+}
