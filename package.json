@@ -22,12 +22,13 @@
     "url": "git+https://github.com/itTkm/azure-retail-prices.git"
   },
   "keywords": [
-    "react",
-    "react-admin",
-    "delete",
-    "button",
-    "custom",
-    "confirm"
+    "cloud",
+    "azure",
+    "retail",
+    "prices",
+    "api",
+    "reservation",
+    "cost"
   ],
   "author": "itTkm",
   "license": "MIT",
