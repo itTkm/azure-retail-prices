@@ -16,7 +16,7 @@ export interface IRetailPrice {
     meterId?: string;
     type?: "DevTestConsumption" | "Consumption" | "Reservation";
     reservationTerm?: string;
-    currencyCode?: "USD";
+    currencyCode?: string;
     tierMinimumUnits?: number;
     retailPrice?: number;
     unitPrice?: number;
@@ -42,7 +42,8 @@ export interface IRetailPriceFilter extends IStringKeyObject {
 /**
  * Get retail prices from the Azure Retail Prices API
  * @param filterObject Filter object
+ * @param currencyCode Currency code string
  * @return Array of retail price object
  */
-declare function getRetailPrices(filterObject: IRetailPriceFilter): Promise<IRetailPrice[]>;
+declare function getRetailPrices(filterObject: IRetailPriceFilter, currencyCode?: string): Promise<IRetailPrice[]>;
 export default getRetailPrices;

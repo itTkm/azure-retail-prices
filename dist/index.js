@@ -22,16 +22,18 @@ const PRICE_TYPES = [
     "Consumption",
     "Reservation",
 ];
+const DEFAULT_CURRENCY_CODE = "USD";
 /**
  * Get retail prices from the Azure Retail Prices API
  * @param filterObject Filter object
+ * @param currencyCode Currency code string
  * @return Array of retail price object
  */
-async function getRetailPrices(filterObject) {
+async function getRetailPrices(filterObject, currencyCode = DEFAULT_CURRENCY_CODE) {
     let retailPrices = [];
     if (_validateFilterObject(filterObject)) {
         const filterString = _generateFilter(filterObject);
-        retailPrices = await _getRetailPrices(filterString);
+        retailPrices = await _getRetailPrices(filterString, currencyCode);
     }
     return retailPrices;
 }
@@ -68,12 +70,13 @@ function _generateFilter(filterObject) {
 /**
  * Get retail prices from the Azure Retail Prices API with filter
  * @param filterString Filter string
+ * @param currencyCode Currency code string
  * @return Array of retail price object
  */
-async function _getRetailPrices(filterString) {
-    let url = API_ENDPOINT;
+async function _getRetailPrices(filterString, currencyCode) {
+    let url = API_ENDPOINT + `?currencyCode='${currencyCode}'`;
     if (filterString !== "")
-        url += `?$filter=${filterString}`;
+        url += `&$filter=${filterString}`;
     let retailPrices = [];
     // eslint-disable-next-line no-constant-condition
     while (true) {

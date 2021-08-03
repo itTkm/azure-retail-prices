@@ -1,6 +1,6 @@
 {
   "name": "azure-retail-prices",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Wrapper of Azure Retail Prices API. You can easily get the retail price of Azure without authenticating.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
