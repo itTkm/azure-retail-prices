@@ -15,10 +15,19 @@ const filter: IRetailPriceFilter = {
 getRetailPrices(filter);
 
 async function getRetailPrices(filter: IRetailPriceFilter) {
-  const startTime = performance.now();
-  const retailPrices = await arp(filter);
-  const endTime = performance.now();
+  console.log("##### without currencyCode option (USD)");
+  let startTime = performance.now();
+  let retailPrices = await arp(filter);
+  let endTime = performance.now();
   console.dir(retailPrices);
   console.log(`Response conut: ${retailPrices.length}`);
-  console.log(`Response time: ${Math.round(endTime - startTime) / 1000} s`);
+  console.log(`Response time: ${Math.round(endTime - startTime) / 1000} s\n`);
+
+  console.log("##### currencyCode = 'JPY'");
+  startTime = performance.now();
+  retailPrices = await arp(filter, "JPY");
+  endTime = performance.now();
+  console.dir(retailPrices);
+  console.log(`Response conut: ${retailPrices.length}`);
+  console.log(`Response time: ${Math.round(endTime - startTime) / 1000} s\n`);
 }

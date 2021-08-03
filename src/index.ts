@@ -24,6 +24,8 @@ const PRICE_TYPES: string[] = [
   "Reservation",
 ];
 
+const DEFAULT_CURRENCY_CODE = "USD";
+
 interface IStringKeyObject {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
@@ -44,7 +46,7 @@ export interface IRetailPrice {
   meterId?: string;
   type?: "DevTestConsumption" | "Consumption" | "Reservation";
   reservationTerm?: string;
-  currencyCode?: "USD";
+  currencyCode?: string;
   tierMinimumUnits?: number;
   retailPrice?: number;
   unitPrice?: number;
@@ -54,7 +56,7 @@ export interface IRetailPrice {
 }
 
 interface IAPIResponse {
-  BillingCurrency: "USD";
+  BillingCurrency: string;
   CustomerEntityId: string;
   CustomerEntityType: string;
   Items: IRetailPrice[];
@@ -81,15 +83,17 @@ export interface IRetailPriceFilter extends IStringKeyObject {
 /**
  * Get retail prices from the Azure Retail Prices API
  * @param filterObject Filter object
+ * @param currencyCode Currency code string
  * @return Array of retail price object
  */
 async function getRetailPrices(
-  filterObject: IRetailPriceFilter
+  filterObject: IRetailPriceFilter,
+  currencyCode = DEFAULT_CURRENCY_CODE
 ): Promise<IRetailPrice[]> {
   let retailPrices: IRetailPrice[] = [];
   if (_validateFilterObject(filterObject)) {
     const filterString = _generateFilter(filterObject);
-    retailPrices = await _getRetailPrices(filterString);
+    retailPrices = await _getRetailPrices(filterString, currencyCode);
   }
   return retailPrices;
 }
@@ -135,11 +139,15 @@ function _generateFilter(filterObject: IRetailPriceFilter): string {
 /**
  * Get retail prices from the Azure Retail Prices API with filter
  * @param filterString Filter string
+ * @param currencyCode Currency code string
  * @return Array of retail price object
  */
-async function _getRetailPrices(filterString: string): Promise<IRetailPrice[]> {
-  let url = API_ENDPOINT;
-  if (filterString !== "") url += `?$filter=${filterString}`;
+async function _getRetailPrices(
+  filterString: string,
+  currencyCode: string
+): Promise<IRetailPrice[]> {
+  let url = API_ENDPOINT + `?currencyCode='${currencyCode}'`;
+  if (filterString !== "") url += `&$filter=${filterString}`;
   let retailPrices: IRetailPrice[] = [];
 
   // eslint-disable-next-line no-constant-condition
