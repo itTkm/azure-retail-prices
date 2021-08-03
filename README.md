@@ -2,7 +2,8 @@
 
 [![npm version](https://img.shields.io/npm/v/azure-retail-prices.svg)](https://www.npmjs.com/package/azure-retail-prices)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](./LICENSE)
-[![Build Status](https://travis-ci.org/itTkm/azure-retail-prices.svg?branch=main)](https://travis-ci.org/itTkm/azure-retail-prices)
+[![Build Status](https://travis-ci.com/itTkm/azure-retail-prices.svg?branch=main)](https://travis-ci.com/itTkm/azure-retail-prices)
+[![Coverage Status](https://coveralls.io/repos/github/itTkm/azure-retail-prices/badge.svg?branch=main)](https://coveralls.io/github/itTkm/azure-retail-prices?branch=main)
 
 This is wrapper of [Azure Retail Prices API](https://docs.microsoft.com/rest/api/cost-management/retail-prices/azure-retail-prices).  
 You can easily get the retail price of Azure without authenticating.
@@ -37,11 +38,23 @@ import arp from "azure-retail-prices";
 // const arp = require("azure-retail-prices").default;
 
 async function getRetailPrices() {
-  const retailPrices = await arp({
+  // without currencyCode option (It will return USD)
+  let retailPrices = await arp({
     serviceName: "Virtual Machines",
     location: "EU West",
     priceType: "Reservation",
   });
+  console.dir(retailPrices);
+
+  // with currencyCode option
+  retailPrices = await arp(
+    {
+      serviceName: "Virtual Machines",
+      location: "EU West",
+      priceType: "Reservation",
+    },
+    "JPY"
+  );
   console.dir(retailPrices);
 }
 ```
@@ -72,6 +85,17 @@ const retailPrices = await arp({
   serviceName: "Virtual Machines",
   location: "EU West",
 });
+
+// Virtual machines located "EU West" with currency in EUR
+//  - Response count: 4K+
+//  - Response time: 40 seconds
+const retailPrices = await arp(
+  {
+    serviceName: "Virtual Machines",
+    location: "EU West",
+  },
+  "EUR"
+);
 
 // Reserved virtual machines located "EU West"
 //  - Response count: 700+
@@ -172,6 +196,30 @@ Filters are supported for the following fields:
 | serviceFamily | Compute                              | Service family of the SKU                                                                         |
 | priceType     | DevTestConsumption                   | Meter consumption type. Other types are `Reservation`, `Consumption`.                             |
 | armSkuName    | Standard_F16s                        | SKU name registered in Azure                                                                      |
+
+## Supported currencies
+
+You append the currency code to the API endpoint, as shown in the API [sample call](#sample-calls).
+
+| Currency code | Detail             |
+| ------------- | ------------------ |
+| USD           | US dollar          |
+| AUD           | Australian dollar  |
+| BRL           | Brazilian real     |
+| CAD           | Canadian dollar    |
+| CHF           | Swiss franc        |
+| CNY           | Chinese yuan       |
+| DKK           | Danish krone       |
+| EUR           | Euro               |
+| GBP           | British pound      |
+| INR           | Indian rupee       |
+| JPY           | Japanese yen       |
+| KRW           | Korean won         |
+| NOK           | Norwegian krone    |
+| NZD           | New Zealand dollar |
+| RUB           | Russian ruble      |
+| SEK           | Swedish krona      |
+| TWD           | Taiwan dollar      |
 
 ## License
 
