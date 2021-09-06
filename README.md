@@ -1,6 +1,7 @@
 # azure-retail-prices
 
 [![npm version](https://img.shields.io/npm/v/azure-retail-prices.svg)](https://www.npmjs.com/package/azure-retail-prices)
+[![npm downloads](https://img.shields.io/npm/dt/azure-retail-prices)](https://www.npmjs.com/package/azure-retail-prices)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](./LICENSE)
 [![Build Status](https://travis-ci.com/itTkm/azure-retail-prices.svg?branch=main)](https://travis-ci.com/itTkm/azure-retail-prices)
 [![Coverage Status](https://coveralls.io/repos/github/itTkm/azure-retail-prices/badge.svg?branch=main)](https://coveralls.io/github/itTkm/azure-retail-prices?branch=main)
